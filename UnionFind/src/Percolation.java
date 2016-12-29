@@ -7,7 +7,7 @@ import java.lang.*;
 
 public class Percolation {
 
-    WeightedQuickUnionUF cells;
+    WeightedQuickUnionUF cells, cells_nb;
     int row_size, size, open_counter;
     boolean open_sites[];
     private int TOP, BOTTOM;
@@ -17,6 +17,7 @@ public class Percolation {
         if (N <= 0)
             throw new IllegalArgumentException();
         cells = new WeightedQuickUnionUF((N*N)+2); //+2 for virtual top (idx = 0) and bottom (idx = N+1)
+        cells_nb = new WeightedQuickUnionUF(N*N+1); //cells without virtual bottom
         open_sites = new boolean[N*N+2];
         open_counter = 0;
         row_size = N;
@@ -72,11 +73,14 @@ public class Percolation {
         open_counter++;
 
         // Make every element in first row point to virtual root
-        if (idx < row_size) {
+        if (idx <= row_size) {
+            //System.out.println("Connecting to TOP");
             cells.union(TOP, idx);
+            cells_nb.union(TOP, idx);
         }
 
         if (idx>row_size*(row_size-1)) {
+            //System.out.println("Connecting to BOTTOM");
             cells.union(idx, BOTTOM);
         }
 
@@ -84,10 +88,11 @@ public class Percolation {
         int[] neighbours = calculateNeighbours(row,col);
 
         for (int n_idx:neighbours){
-            if (n_idx != -1 && open_sites[n_idx])
-                cells.union(idx,n_idx);
+            if (n_idx != -1 && open_sites[n_idx]) {
+                cells.union(idx, n_idx);
+                cells_nb.union(idx, n_idx);
+            }
         }
-
     }
 
     public boolean isOpen(int row, int col){
@@ -100,7 +105,7 @@ public class Percolation {
     public boolean isFull(int row, int col){
         int idx = convertTo1D(row,col);
         validate(idx);
-        return cells.connected(TOP,idx);
+        return cells_nb.connected(TOP,idx);
     }
 
     public int numberOfOpenSites(){
@@ -112,6 +117,14 @@ public class Percolation {
     }
 
     public static void main(String args[]){
+
+//        Percolation test = new Percolation(1);
+//        test.open(1,1);
+//        System.out.format("Percolates: %b\n", test.percolates());
+//        System.out.format("Open(1,1) : %b\n", test.isOpen(1,1));
+//        System.out.format("Full(1,1) : %b\n", test.isFull(1,1));
+//        System.out.format("Testing connection (1,1) w/ TOP : %b\n", test.cells.connected(0,1));
+
         Percolation test = new Percolation(3);
 
         System.out.println("Mini test cases");
@@ -125,10 +138,16 @@ public class Percolation {
         test.open(1,2);
         System.out.println("Opening (2,2)");
         test.open(2,2);
-        System.out.println("Opening (2,3)");
-        test.open(2,3);
+
         System.out.println("Opening (3,3)");
         test.open(3,3);
+
+        System.out.println("Opening (2,3)");
+        test.open(2,3);
+
+        System.out.println("Opening (3,1)");
+        test.open(3,1);
+
 
         System.out.println();
         System.out.println("-------");
