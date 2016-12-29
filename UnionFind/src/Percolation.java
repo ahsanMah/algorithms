@@ -7,9 +7,9 @@ import java.lang.*;
 
 public class Percolation {
 
-    WeightedQuickUnionUF cells, cells_nb;
-    int row_size, size, open_counter;
-    boolean open_sites[];
+    private WeightedQuickUnionUF cells, cells_nb;
+    private int row_size, size, open_counter;
+    private boolean open_sites[];
     private int TOP, BOTTOM;
 
     //create virtual top and bottom sites
@@ -118,53 +118,55 @@ public class Percolation {
 
     public static void main(String args[]){
 
-//        Percolation test = new Percolation(1);
-//        test.open(1,1);
-//        System.out.format("Percolates: %b\n", test.percolates());
-//        System.out.format("Open(1,1) : %b\n", test.isOpen(1,1));
-//        System.out.format("Full(1,1) : %b\n", test.isFull(1,1));
-//        System.out.format("Testing connection (1,1) w/ TOP : %b\n", test.cells.connected(0,1));
-
-        Percolation test = new Percolation(3);
-
-        System.out.println("Mini test cases");
-        System.out.println("-------");
-
-        System.out.format("Converting (3,2): %d\n" ,test.convertTo1D(2,5));
-
-        System.out.println();
-        System.out.println("-------");
-        System.out.println("Opening (1,2)");
-        test.open(1,2);
-        System.out.println("Opening (2,2)");
-        test.open(2,2);
-
-        System.out.println("Opening (3,3)");
-        test.open(3,3);
-
-        System.out.println("Opening (2,3)");
-        test.open(2,3);
-
-        System.out.println("Opening (3,1)");
-        test.open(3,1);
-
-
-        System.out.println();
-        System.out.println("-------");
-        System.out.format("Open(1,1) : %b\n", test.isOpen(1,1));
-        System.out.format("Open(1,2) : %b\n", test.isOpen(2,3));
-        System.out.format("Full(2,2) : %b\n", test.isFull(2,2));
-        System.out.format("Full(3,1) : %b\n", test.isFull(3,1));
-
-        System.out.println();
-        System.out.println("-------");
-        System.out.format("Testing connection (1,2) w/ (2,2) : %b\n", test.cells.connected(0,2));
-        System.out.format("Testing connection (2,2) w/ (2,1) : %b\n", test.cells.connected(4,5));
-        System.out.format("Testing connection (2,2) w/ (2,3) : %b\n", test.cells.connected(5,6));
-
-        System.out.println();
-        System.out.println("-------");
+        Percolation test = new Percolation(1);
         System.out.format("Percolates: %b\n", test.percolates());
+        System.out.format("Percolates: %b\n", test.percolates());
+        test.open(1,1);
+        System.out.format("Open(1,1) : %b\n", test.isOpen(1,1));
+        System.out.format("Full(1,1) : %b\n", test.isFull(1,1));
+        System.out.format("Testing connection (1,1) w/ TOP : %b\n", test.cells.connected(0,1));
+        System.out.format("Percolates: %b\n", test.percolates());
+
+//        Percolation test = new Percolation(3);
+//
+//        System.out.println("Mini test cases");
+//        System.out.println("-------");
+//
+//        System.out.format("Converting (3,2): %d\n" ,test.convertTo1D(2,5));
+//
+//        System.out.println();
+//        System.out.println("-------");
+//        System.out.println("Opening (1,2)");
+//        test.open(1,2);
+//        System.out.println("Opening (2,2)");
+//        test.open(2,2);
+//
+//        System.out.println("Opening (3,3)");
+//        test.open(3,3);
+//
+//        System.out.println("Opening (2,3)");
+//        test.open(2,3);
+//
+//        System.out.println("Opening (3,1)");
+//        test.open(3,1);
+//
+//
+//        System.out.println();
+//        System.out.println("-------");
+//        System.out.format("Open(1,1) : %b\n", test.isOpen(1,1));
+//        System.out.format("Open(1,2) : %b\n", test.isOpen(2,3));
+//        System.out.format("Full(2,2) : %b\n", test.isFull(2,2));
+//        System.out.format("Full(3,1) : %b\n", test.isFull(3,1));
+//
+//        System.out.println();
+//        System.out.println("-------");
+//        System.out.format("Testing connection (1,2) w/ (2,2) : %b\n", test.cells.connected(0,2));
+//        System.out.format("Testing connection (2,2) w/ (2,1) : %b\n", test.cells.connected(4,5));
+//        System.out.format("Testing connection (2,2) w/ (2,3) : %b\n", test.cells.connected(5,6));
+//
+//        System.out.println();
+//        System.out.println("-------");
+//        System.out.format("Percolates: %b\n", test.percolates());
     }
 
 }
