@@ -15,13 +15,13 @@ public class Main {
 
 //        dstack.addFirst(null);
         dstack.addFirst("1");
-        dstack.addFirst("2");
-//        dstack.removeLast();
+//        dstack.addFirst("2");
+        dstack.removeLast();
         //dstack.removeFirst();
-//        dstack.addLast("Hello!");
-//        dstack.removeFirst();
-        dstack.removeLast();
-        dstack.removeLast();
+        dstack.addLast("Hello!");
+        dstack.removeFirst();
+//        dstack.removeLast();
+  //      dstack.removeLast();
   //      dstack.removeLast();
 //        dstack.addFirst("World..?");
         dstack.addLast("Who am I?");

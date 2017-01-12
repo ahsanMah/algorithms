@@ -37,9 +37,15 @@ public class Deque<Item> implements Iterable<Item> {
         public void remove(){ throw new UnsupportedOperationException("Removing items through iterator is not allowed");}
     }
 
-    private Node head = null;
-    private Node tail = null;
-    private int size = 0;
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public Deque(){
+        head = null;
+        tail = null;
+        size = 0;
+    }
 
     public Iterator<Item> iterator(){return new dequeIterator();}
 
