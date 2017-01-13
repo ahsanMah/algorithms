@@ -10,20 +10,21 @@ public class RandomizedQueue<Item> implements Iterable<Item>{
 
     private class randIterator implements Iterator<Item> {
         int curr = 0;
-        Item[] iterQ = (Item[]) new Object[queue.length];
+        Item[] iterQ = (Item[]) new Object[size];
 
         public randIterator(){
             int idx = 0;
             for (int i = 0; i < queue.length; i++){
-                if (queue[i] != null){
+                if (queue[i] != null)
                     iterQ[idx++] = queue[i];
-                }
-            }
 
+            }
+            StdRandom.shuffle(iterQ);
         }
 
-        public Item next(){return queue[0];}
-        public boolean hasNext(){return curr != iterQ.length;}
+        public Item next()       {return iterQ[curr++];}
+
+        public boolean hasNext() {return curr != iterQ.length;}
     }
 
     private Item[] queue;
