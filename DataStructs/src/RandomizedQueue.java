@@ -1,6 +1,8 @@
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import edu.princeton.cs.algs4.StdRandom;
 
 /**
@@ -22,18 +24,24 @@ public class RandomizedQueue<Item> implements Iterable<Item>{
             StdRandom.shuffle(iterQ);
         }
 
-        public Item next()       {return iterQ[curr++];}
+        public Item next() {
+            if (!hasNext()){throw new NoSuchElementException("Iterator is empty");}
+
+            return iterQ[curr++];
+        }
 
         public boolean hasNext() {return curr != iterQ.length;}
+
+        public void remove(){ throw new UnsupportedOperationException("Removing items through iterator is not allowed");}
     }
 
     private Item[] queue;
     private int tail;
     private int size;
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     public RandomizedQueue(){
-        queue = (Item[]) new Object[5];
+        queue = (Item[]) new Object[2];
         tail  = 0;
         size = 0;
     }
@@ -58,6 +66,9 @@ public class RandomizedQueue<Item> implements Iterable<Item>{
     }
 
     public void enqueue(Item item){
+
+        if (item == null) {throw new NullPointerException("Cannot add Null item to queue");}
+
         queue[tail] = item;
         tail++;
         size++;
@@ -68,6 +79,9 @@ public class RandomizedQueue<Item> implements Iterable<Item>{
     }
 
     public Item dequeue(){
+
+        if (isEmpty()){throw new NoSuchElementException("Cannot remove item from empty queue");}
+
         Item data = null;
         int idx = 0;
         while (data == null){
@@ -84,6 +98,9 @@ public class RandomizedQueue<Item> implements Iterable<Item>{
     }
 
     public Item sample(){
+
+        if (isEmpty()){throw new NoSuchElementException("Cannot sample item from empty queue");}
+
         Item data = null;
         int idx = 0;
         while (data == null){

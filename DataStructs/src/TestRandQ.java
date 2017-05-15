@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.Stopwatch;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by smaug on 1/12/17.
  */
@@ -20,6 +22,13 @@ public class TestRandQ {
     }
 
     public void testRemove(){
+
+        try{test.dequeue();}
+        catch (NoSuchElementException e){
+            System.out.println(e.getMessage());
+        }
+
+
 
         for (Integer i = 0; i < MAX/2 ;i++){
             System.out.format("%d: %d\n",i,test.dequeue());
